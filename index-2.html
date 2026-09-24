@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1B3A5C">
+<title>컨벤션 강의 노트 | 벨라</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧭%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'GmarketSans';font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');}
+@font-face{font-family:'GmarketSans';font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');}
+
+:root{
+  --navy:#1B3A5C;
+  --navy-deep:#12283f;
+  --gold:#D4A94A;
+  --gold-soft:#f3e6c4;
+  --ivory:#FAF7F2;
+  --ash:#F1ECE3;
+  --ink:#1f2d3d;
+  --muted:#5f6d7c;
+  --line:#e4dccd;
+  --ok:#2f7d5b;
+  --head:'GmarketSans','Noto Sans KR',sans-serif;
+  --body:'Noto Sans KR',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));}
+body{
+  background:var(--ivory);color:var(--ink);font-family:var(--body);
+  font-size:15px;line-height:1.75;word-break:keep-all;overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit;}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px;}
+.wrap{max-width:520px;margin:0 auto;}
+
+/* ── Hero ── */
+.hero{
+  background:var(--navy);color:#fff;
+  padding:calc(44px + env(safe-area-inset-top,0px)) 24px 40px;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
+  background:repeating-linear-gradient(90deg,var(--gold) 0 10px,transparent 10px 18px);opacity:.75;
+}
+.hero .wrap{position:relative;}
+.ov{display:block;color:var(--gold);font-size:12px;font-weight:500;letter-spacing:.14em;margin-bottom:6px;}
+.hero h1{font-family:var(--head);font-weight:700;font-size:29px;line-height:1.35;letter-spacing:-.01em;margin:8px 0 14px;}
+.hero p.lead{color:rgba(255,255,255,.82);font-size:14.5px;line-height:1.8;}
+.facts{display:grid;gap:10px;margin-top:26px;}
+.fact{
+  display:flex;gap:12px;align-items:center;
+  border:1px solid rgba(212,169,74,.45);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.04);
+}
+.fact b{font-family:var(--head);font-weight:500;color:var(--gold);font-size:13px;min-width:74px;}
+.fact span{font-size:13.5px;color:rgba(255,255,255,.9);line-height:1.5;}
+
+/* ── Sticky nav ── */
+.nav{
+  position:sticky;top:0;z-index:20;background:rgba(250,247,242,.94);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  padding-top:env(safe-area-inset-top,0px);
+}
+.nav-in{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none;max-width:520px;margin:0 auto;}
+.nav-in::-webkit-scrollbar{display:none;}
+.chip{
+  flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-size:13.5px;font-weight:500;color:var(--navy);text-decoration:none;
+  display:inline-flex;align-items:center;white-space:nowrap;
+}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+/* ── Layout ── */
+main{padding:26px 20px calc(60px + env(safe-area-inset-bottom,0px));}
+.notice{
+  background:var(--ash);border-left:4px solid var(--gold);border-radius:6px 12px 12px 6px;
+  padding:14px 16px;font-size:13.5px;color:var(--ink);margin-bottom:30px;
+}
+.notice b{color:var(--navy);}
+
+.wp{position:relative;margin-left:8px;padding:0 0 38px 22px;border-left:1.5px dashed rgba(212,169,74,.7);}
+.wp:last-of-type{padding-bottom:8px;}
+.wp-head{margin-bottom:16px;}
+.wp-head::before{
+  content:"";position:absolute;left:-8.5px;top:4px;width:15px;height:15px;border-radius:50%;
+  background:var(--ivory);border:3px solid var(--gold);
+}
+.wp-head h2{font-family:var(--head);font-weight:700;font-size:21px;line-height:1.4;color:var(--navy);letter-spacing:-.01em;}
+.sub{color:var(--muted);font-size:13.5px;margin-top:4px;}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 16px;margin-bottom:12px;}
+.card h3{font-family:var(--head);font-weight:500;font-size:15.5px;color:var(--navy);margin-bottom:6px;line-height:1.5;}
+.card p{font-size:14px;color:var(--ink);}
+.card p + p{margin-top:6px;}
+.card .ico{font-size:20px;margin-right:6px;}
+.quote{
+  margin:18px 0 4px;padding:18px 18px;border-radius:14px;background:var(--navy);color:#fff;
+  font-family:var(--head);font-weight:500;font-size:16px;line-height:1.7;text-align:center;
+}
+.quote small{display:block;margin-top:6px;font-family:var(--body);font-weight:300;font-size:12px;color:rgba(255,255,255,.65);}
+.tag{
+  display:inline-block;font-size:11.5px;font-weight:500;padding:2px 9px;border-radius:999px;
+  background:var(--gold-soft);color:#7a5a12;margin-left:6px;vertical-align:middle;
+}
+.warn{font-size:12.5px;color:#8a6a1c;background:#fbf3dc;border-radius:8px;padding:8px 11px;margin-top:10px;line-height:1.6;}
+
+/* ── Points table ── */
+.pt{display:grid;gap:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:14px;}
+.pt div{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px;}
+.pt div:last-child{border-bottom:0;}
+.pt b{font-family:var(--head);font-weight:500;color:var(--navy);white-space:nowrap;}
+
+/* ── Stages ── */
+.stages{display:grid;gap:10px;margin-bottom:16px;}
+.stage{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px;}
+.stage .n{width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-family:var(--head);font-size:14px;}
+.stage .p{font-family:var(--head);font-weight:500;color:var(--navy);font-size:15px;line-height:1.4;}
+.stage .p small{display:block;font-family:var(--body);font-weight:300;font-size:12px;color:var(--muted);}
+.stage .usd{font-family:var(--head);font-weight:700;color:#8a6a1c;font-size:15px;}
+
+/* ── Calculator ── */
+.calc{background:#fff;border:1.5px solid var(--gold);border-radius:16px;padding:18px 16px 16px;margin:6px 0 4px;}
+.calc h3{font-family:var(--head);font-weight:700;font-size:16.5px;color:var(--navy);margin-bottom:2px;}
+.calc .sub{margin-bottom:14px;}
+.rows{display:grid;gap:8px;}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--ivory);border-radius:12px;padding:8px 8px 8px 14px;}
+.row .lb{font-size:13.5px;line-height:1.45;}
+.row .lb small{display:block;color:var(--muted);font-size:11.5px;}
+.step{display:flex;align-items:center;gap:2px;}
+.step button{width:50px;height:50px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:22px;color:var(--navy);line-height:1;}
+.step button:active{background:var(--gold-soft);}
+.step output{min-width:32px;text-align:center;font-family:var(--head);font-size:17px;color:var(--navy);}
+
+.track-wrap{position:relative;margin:34px 6px 8px;height:64px;}
+.track{position:absolute;left:0;right:0;top:34px;height:10px;border-radius:99px;background:var(--ash);}
+.fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:99px;background:linear-gradient(90deg,var(--navy),var(--gold));transition:width .35s ease;}
+.mk{position:absolute;top:26px;width:2px;height:26px;background:var(--navy);opacity:.45;transform:translateX(-1px);}
+.mk span{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:11.5px;color:var(--navy);white-space:nowrap;font-weight:500;line-height:1.3;text-align:center;}
+.mk em{font-style:normal;display:block;color:#8a6a1c;font-size:10.5px;}
+.ship{position:absolute;top:2px;font-size:22px;transform:translateX(-50%);transition:left .35s ease;left:0;}
+.res{margin-top:6px;background:var(--navy);color:#fff;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.7;}
+.res b{color:var(--gold);font-family:var(--head);font-weight:500;}
+.res .big{font-family:var(--head);font-size:22px;color:#fff;display:block;margin-bottom:2px;}
+
+/* ── Timeline (2027) ── */
+.tl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;text-align:center;margin-bottom:14px;position:relative;}
+.tl::before{content:"";position:absolute;left:16%;right:16%;top:13px;border-top:2px dashed var(--gold);}
+.tl div{position:relative;font-size:12.5px;line-height:1.45;color:var(--ink);}
+.tl i{display:block;width:26px;height:26px;border-radius:50%;background:var(--navy);margin:0 auto 6px;border:3px solid var(--ivory);box-shadow:0 0 0 1.5px var(--gold);}
+.tl b{display:block;font-family:var(--head);font-weight:500;color:var(--navy);font-size:13px;}
+.list{list-style:none;display:grid;gap:8px;}
+.list li{position:relative;padding-left:20px;font-size:14px;}
+.list li::before{content:"";position:absolute;left:3px;top:.72em;width:7px;height:7px;border-radius:50%;background:var(--gold);}
+
+/* ── Accordion ── */
+details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+summary{list-style:none;cursor:pointer;min-height:56px;padding:14px 46px 14px 16px;position:relative;font-family:var(--head);font-weight:500;font-size:14.5px;color:var(--navy);line-height:1.5;display:flex;align-items:center;}
+summary::-webkit-details-marker{display:none;}
+summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--gold);font-family:var(--body);}
+details[open] summary::after{content:"–";}
+details[open] summary{border-bottom:1px solid var(--line);background:var(--ash);}
+.dbody{padding:14px 16px 16px;font-size:14px;}
+.dbody p + p{margin-top:8px;}
+.take{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--gold-soft);color:#5d4508;font-size:13.5px;font-weight:500;line-height:1.6;}
+
+/* ── Apply ── */
+.grp{font-family:var(--head);font-weight:500;color:var(--navy);font-size:14.5px;margin:20px 0 10px;display:flex;align-items:center;gap:8px;}
+.grp:first-of-type{margin-top:4px;}
+.grp::after{content:"";flex:1;height:1px;background:var(--line);}
+.todo{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;min-height:56px;padding:13px 14px;background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:8px;font-size:14px;line-height:1.6;}
+.todo .box{flex:0 0 24px;height:24px;border-radius:7px;border:2px solid var(--gold);margin-top:1px;display:grid;place-items:center;color:transparent;font-size:15px;}
+.todo[aria-checked="true"]{background:#f4f8f5;border-color:#cfe3d8;}
+.todo[aria-checked="true"] .box{background:var(--ok);border-color:var(--ok);color:#fff;}
+.todo[aria-checked="true"] .tx{color:var(--muted);}
+.todo .tx small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px;}
+.prog{font-size:12.5px;color:var(--muted);text-align:right;margin:-4px 0 10px;}
+
+.wpq{display:grid;gap:10px;margin-bottom:8px;}
+.wpq label{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;font-weight:500;color:var(--navy);}
+.wpq label small{display:block;color:var(--muted);font-weight:300;font-size:12px;margin-bottom:6px;}
+.wpq textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-family:var(--body);font-size:14px;line-height:1.6;resize:vertical;min-height:64px;background:var(--ivory);color:var(--ink);}
+
+.script{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;}
+.script h4{font-family:var(--head);font-weight:500;font-size:14px;color:var(--navy);margin-bottom:6px;}
+.script p{font-size:14px;background:var(--ivory);border-radius:10px;padding:11px 13px;line-height:1.75;}
+.copy{margin-top:10px;min-height:50px;width:100%;border-radius:12px;background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:14.5px;}
+.copy:active{filter:brightness(.95);}
+
+.chk li{position:relative;padding-left:24px;font-size:14px;}
+.chk li::before{content:"?";position:absolute;left:0;top:.05em;width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--navy-deep);font-size:12px;font-weight:700;display:grid;place-items:center;line-height:1;}
+
+footer{background:var(--navy);color:rgba(255,255,255,.75);padding:28px 24px calc(34px + env(safe-area-inset-bottom,0px));font-size:12.5px;line-height:1.8;text-align:center;}
+footer b{color:var(--gold);font-family:var(--head);font-weight:500;}
+
+@media (max-width:360px){
+  .hero h1{font-size:25px;}
+  .mk span{font-size:10.5px;}
+  .fact b{min-width:64px;}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .fill,.ship{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="ov">Convention notes</span>
+    <h1>다음 10년의 키워드는<br>'역대급'이에요</h1>
+    <p class="lead">축하 파티는 도착지가 아니라 경유지.<br>멈춰 서서 "우리 제대로 가고 있나?"를 점검하는 시간이었어요.<br>강의 정리와 벨라 사업 적용 노트예요 🧭</p>
+    <div class="facts">
+      <div class="fact"><b>역대급</b><span>앞으로 10년 동안 집중할 단어</span></div>
+      <div class="fact"><b>점수 레이스</b><span>150 · 240 · 335점, 단계별 여행 쿠폰</span></div>
+      <div class="fact"><b>2027년 3월</b><span>변화가 점진적으로 적용되는 시점</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="섹션 이동">
+  <div class="nav-in" id="nav">
+    <a class="chip" href="#big">큰 그림</a>
+    <a class="chip" href="#race">점수 레이스</a>
+    <a class="chip" href="#protect">직급 보호</a>
+    <a class="chip" href="#road">2027년 3월</a>
+    <a class="chip" href="#voices">리더 메시지</a>
+    <a class="chip" href="#apply">나에게 적용</a>
+    <a class="chip" href="#check">확인할 것</a>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+  <div class="notice">
+    <b>읽기 전에 한 가지만!</b><br>
+    실시간 번역 자막을 바탕으로 정리해서 숫자와 표현이 정확하지 않을 수 있어요. 마지막 <b>‘확인할 것’</b>에 애매했던 부분을 모아 두었어요.
+    보상 수치가 들어 있는 내부 학습용이라, 팀에 공유하기 전에는 표현을 한 번 손봐요.
+  </div>
+
+  <!-- 1. 큰 그림 -->
+  <section class="wp" id="big">
+    <div class="wp-head"><span class="ov">Big picture</span><h2>이번 강의의 큰 그림</h2></div>
+
+    <div class="card">
+      <h3><span class="ico">🧭</span>웨이포인트 = 점검하는 경유지</h3>
+      <p>큰 파티와 축하도 최종 목적지는 아니에요. 선원들은 항해 중 경유지에서 진행 상황을 확인해요.</p>
+      <p>뒤로 물러서서 왼쪽, 오른쪽을 둘러보라고 했어요.</p>
+      <ul class="list" style="margin-top:10px">
+        <li>내가 제대로 된 팀을 꾸렸나?</li>
+        <li>내게 필요한 도구가 있나?</li>
+        <li>내게 필요한 자원이 있나?</li>
+        <li>나는 그럴 믿음을 갖고 있나?</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ico">⭐</span>역대급 — 지금도 최고, 그래도 더 나아지기</h3>
+      <p>‘우리는 A’라고 알고 있지만 개선할 점이 있다는 걸 안다고 했어요. 그래서 팀 의견을 받는 설문을 만들었고, 도구와 기술을 더 좋게 다듬는 중이에요.</p>
+      <p>작은 편차도 놓치지 않는 선장처럼, 사소한 어긋남이 문제로 커지기 전에 잡자는 이야기도 있었어요.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="ico">🚢</span>이번 주말 예고된 소식</h3>
+      <ul class="list">
+        <li>새로운 크루즈 선사와의 제휴 2건</li>
+        <li>완전히 새로운 제품</li>
+        <li>보상 플랜 업데이트, 더 나은 인센티브와 도구</li>
+      </ul>
+    </div>
+
+    <div class="quote">“지름길은 없다.<br>더 똑똑하게 생각하고, 더 나아지세요.”<small>강연 자막 중에서</small></div>
+  </section>
+
+  <!-- 2. 레이스 -->
+  <section class="wp" id="race">
+    <div class="wp-head"><span class="ov">The race</span><h2>점수 레이스</h2><p class="sub">이미 진행 중이라고 알려줬어요</p></div>
+
+    <div class="card">
+      <h3>보상이 ‘여행 쿠폰’ 방식이에요</h3>
+      <p>지난 대회는 부문별로 진행했고, 안쪽 객실을 배정받는 경우도 있었어요. 다른 객실 유형을 원한다는 의견이 많아서, 이번엔 <b>여행 쿠폰 금액</b>을 받고 예약에 쓰는 방식으로 바꿨다고 해요.</p>
+      <p>쿠폰은 회사가 제안하는 <b>4가지 여행 상품</b> 중에서 골라 써요. 더 나은 객실이 필요하면 스스로 결정하면 돼요.</p>
+    </div>
+
+    <div class="pt" role="table" aria-label="점수표">
+      <div><span>프리미엄 파트너 활성화</span><b>20점</b></div>
+      <div><span>기존 파트너 <span class="tag">자막 표기</span></span><b>10점</b></div>
+      <div><span>스타터 파트너 · 파트너 전용</span><b>5점</b></div>
+      <div><span>프리미엄 회원 (회원 전용)</span><b>10점</b></div>
+    </div>
+
+    <div class="stages">
+      <div class="stage"><span class="n">1</span><span class="p">150점<small>1단계</small></span><span class="usd">$2,000</span></div>
+      <div class="stage"><span class="n">2</span><span class="p">240점<small>2단계</small></span><span class="usd">$2,500</span></div>
+      <div class="stage"><span class="n">3</span><span class="p">335점<small>3단계</small></span><span class="usd">$3,500</span></div>
+    </div>
+    <p class="sub" style="margin:-4px 0 14px">금액은 여행 쿠폰 상당액이에요. 3단계는 리더십을 보여준 분들께 드린다고 했어요.</p>
+
+    <div class="card">
+      <h3>자막에 나온 예시</h3>
+      <p>“150점에 어떻게 가나요?” → <b>프리미엄 파트너 활성화 8건</b> (8×20 = 160점) 또는 <b>15건 클래식</b> (15×10 = 150점)으로 이해했어요.</p>
+    </div>
+
+    <div class="calc" aria-labelledby="ct">
+      <h3 id="ct">🚢 내 레이스 점수 계산기</h3>
+      <p class="sub">건수를 넣으면 지금 위치가 보여요</p>
+      <div class="rows" id="rows"></div>
+
+      <div class="track-wrap" aria-hidden="true">
+        <div class="track"><div class="fill" id="fill"></div></div>
+        <div class="mk" style="left:44.78%"><span>150<em>1단계</em></span></div>
+        <div class="mk" style="left:71.64%"><span>240<em>2단계</em></span></div>
+        <div class="mk" style="left:100%"><span>335<em>3단계</em></span></div>
+        <div class="ship" id="ship">🚢</div>
+      </div>
+
+      <div class="res" id="res" aria-live="polite"></div>
+    </div>
+    <div class="warn">점수표·단계 금액은 자막 기준이에요. 공식 슬라이드로 꼭 다시 확인해요.</div>
+  </section>
+
+  <!-- 3. 직급 보호 -->
+  <section class="wp" id="protect">
+    <div class="wp-head"><span class="ov">Protection</span><h2>팀 활성화와 ‘두 달 연속’</h2></div>
+    <div class="card">
+      <h3>한 발표자의 이야기</h3>
+      <p>이번 달 팀 활성화 요건은 채웠어요. 그런데 정기 실적이 85%만 들어와서 <b>마케팅 디렉터(MD)를 아슬아슬하게 놓쳤다</b>는 예시였어요.</p>
+      <p>다시 <b>보호 대상 자격</b>을 얻으려면 요건을 <b>두 달 연속</b> 충족해야 해요.</p>
+    </div>
+    <div class="card">
+      <h3>이 이야기에서 가져갈 것</h3>
+      <p>한 달을 놓치면 회복에 두 달이 걸릴 수 있어요. 그래서 마감 직전이 아니라 <b>중간 웨이포인트</b>에서 미리 점검하는 게 중요해요.</p>
+    </div>
+    <div class="warn">‘보호 대상’이 정확히 어떤 자격인지, 어떤 직급에 해당하는지는 자막만으로는 애매해요.</div>
+  </section>
+
+  <!-- 4. 2027 -->
+  <section class="wp" id="road">
+    <div class="wp-head"><span class="ov">Road to March 2027</span><h2>2027년 3월까지의 변화</h2></div>
+    <div class="tl">
+      <div><i></i><b>지금</b>발표 시작</div>
+      <div><i></i><b>점진 적용</b>단계별로 시행</div>
+      <div><i></i><b>2027년 3월</b>중요한 날짜</div>
+    </div>
+    <div class="card">
+      <ul class="list">
+        <li>지금 말하는 내용들이 <b>지금부터 2027년 3월 사이</b>에 순서대로 적용돼요.</li>
+        <li>일부러 <b>점진적으로 적응할 시간</b>을 주려는 거예요. 변화에 대비하고 사업을 넓힐 시간이에요.</li>
+        <li>‘블랙 카드’를 써도 당장 바뀌는 건 없다는 취지의 말이 있었어요.</li>
+        <li>이번 주말 이후 <b>10년 동안 나아갈 방향</b>에 확신을 갖게 될 거라고 했어요.</li>
+      </ul>
+    </div>
+    <div class="warn">구체적인 변경 항목은 다음 발표(보상 플랜 업데이트) 슬라이드가 나오면 채워 넣어요.</div>
+  </section>
+
+  <!-- 5. 리더 메시지 -->
+  <section class="wp" id="voices">
+    <div class="wp-head"><span class="ov">Leaders' voices</span><h2>리더들의 메시지</h2><p class="sub">눌러서 펼쳐 보세요</p></div>
+
+    <details>
+      <summary>사람의 잠재력을 크게 봐주기</summary>
+      <div class="dbody">
+        <p>잠재력이 있는지 없는지는 평가할 수 있어도, 그 사람이 내일 어떤 사람이 될지는 알 수 없어요. 멘토가 나를 크게 봐준 것처럼, 모든 파트너의 잠재력이 매우 크다고 믿어주는 게 우리의 일이라고 했어요.</p>
+        <div class="take">어떤 사람에게 부족한 건 능력이 아니라 <b>응원해 주는 사람</b>일 수 있어요.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>파트너의 변화가 나의 변화</summary>
+      <div class="dbody">
+        <p>파트너에게 자신감과 자존감을 심어줬더니 자기도 변하기 시작했대요. 처음엔 도움이 되는 줄 몰랐지만, 나중엔 파트너를 진심으로 사랑하고 믿는 ‘봉사의 단계’에 갔다고 해요.</p>
+        <p>그럼 팀에 어떻게 전할까요? “그냥, 사랑한다고 말하면 돼요.”</p>
+        <div class="take">변화가 눈에 보이면 팀 전체에 영감이 번져요.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>어려울 때 진짜 봉사가 시험받는다</summary>
+      <div class="dbody">
+        <p>모든 게 순조로울 때가 아니라, 어려울 때 진정한 봉사가 시험받아요. 지금이 사업의 격동기라는 말도 있었어요.</p>
+        <p>결과의 중심에 나를 두지 말고 <b>팀원들</b>을 두라고 했어요. 방에 12명뿐이어도, 다섯 명에게 이야기해도 큰 무대처럼 임했다고 해요. 양보다 질이에요.</p>
+        <div class="take">사람이 적어도 준비는 가득 찬 방처럼.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>처음부터 온전한 헌신, 내가 먼저 경험하기</summary>
+      <div class="dbody">
+        <p>카자흐스탄에는 크루즈를 타 본 사람이 거의 없었대요. 말로만 권해서는 아무도 믿지 않아서, <b>본인들이 먼저 직접 가야만 했다</b>고 해요.</p>
+        <p>처음부터 이 사업과 회사에 완전히 헌신했고, 이야기할 때면 애정이 가득하고 눈빛이 반짝였다고 해요.</p>
+        <div class="take">경험이 설득력이에요. 눈빛도 메시지예요.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>내 삶이 곧 본보기</summary>
+      <div class="dbody">
+        <p>온 가족이 함께 여행하는 걸 일상으로 만들고, 일 년에 여러 번 여행할 수 있다는 걸 보여주는 게 목표라면? 그걸 다른 사람들에게 목표로 보여주면 큰 결과가 난다고 했어요.</p>
+        <p>누구에게도 증명할 필요는 없어요. 내가 사는 모습, 리더들이 사는 모습이 본보기예요. 그리고 성공 요인 중 하나는 <b>회사 행사에 단 한 번도 빠지지 않는 것</b>이라고 했어요.</p>
+        <div class="take">설명보다 삶으로 보여주기. 행사는 리더의 기본기.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>꿈은 먼저 그려져요</summary>
+      <div class="dbody">
+        <p>“8년 전에 우리가 구상했던 것이 현실이 됐다.” 마음이 첫 번째 것을 볼 수 없으면 아무것도 창조할 수 없다는 이야기도 있었어요. 인정받는 자신의 모습을 미리 상상하고, 그 모습이 매일 아침 눈을 뜨는 이유였대요.</p>
+        <p>이사회에 올랐다는 사실보다 <b>그 세월이 나를 어떤 사람으로 만들었는지</b>가 중요하고, 목적지가 아니라 여정이라고 했어요.</p>
+        <div class="take">가족, 팀, 멘토 없이는 불가능했다는 감사가 늘 뒤따랐어요.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>매시간 리포트, 끊이지 않는 전화</summary>
+      <div class="dbody">
+        <p>새로 시작하던 시기에 한 시간마다 등록 현황 리포트를 받고, 전화가 끊임없이 울리고, 모든 통화를 녹음했다는 이야기예요. 모두가 보고하고 전화하며 엄청난 에너지가 뿜어져 나왔대요.</p>
+        <div class="take">팀의 리듬 = 리포트 → 통화 → 에너지.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>용기, 그리고 지름길 없음</summary>
+      <div class="dbody">
+        <p>자기소개에도, 후속 연락에도 용기가 필요해요. 모두가 부정적인 말을 할 때는 나서서 “저는 다르게 생각해요”라고 말할 용기가 필요하고요.</p>
+        <p>부정적인 피드백은 이렇게 받을 수 있다고 했어요. “말씀 잘 들었습니다. 의견을 존중하며, 저는 다른 관점을 갖고 있어요.”</p>
+        <p>여기까지 온 건 더 나아지고 싶은 갈증이 있어서예요. 안락함을 내려놓고 나서달라는 부탁이 있었어요.</p>
+        <div class="take">사랑과 배려의 마음으로 말하면 훨씬 더 잘할 수 있어요.</div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 6. 적용 -->
+  <section class="wp" id="apply">
+    <div class="wp-head"><span class="ov">For Bella</span><h2>벨라에게 적용하기</h2><p class="sub">리더 4명 · 10월 31일 마감 · 팀 트레이닝 계획에 맞춰 뽑았어요</p></div>
+
+    <div class="grp">이번 주 (9월 마지막 주)</div>
+    <div class="prog" id="prog">0 / 0 완료</div>
+
+    <button class="todo" role="checkbox" aria-checked="false" data-k="a1"><span class="box">✓</span><span class="tx">내 팀 레이스 점수 확인하고 <b>목표 단계 정하기</b><small>공식 슬라이드·백오피스 기준. 위 계산기로 부족한 건수를 봐요.</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="a2"><span class="box">✓</span><span class="tx"><b>‘두 달 연속’ 요건</b> 확인하기<small>9월·10월을 이어서 채워야 하는지 체크. 10월 31일 마감과 함께 봐요.</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="a3"><span class="box">✓</span><span class="tx">리더 4명(라라·루나·효정·서아)에게 <b>잠재력 한 문장</b> 전하기<small>15분 통화나 보이스 메시지로. 아래 문장 예시를 써요.</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="a4"><span class="box">✓</span><span class="tx">아래 <b>웨이포인트 4문항</b> 한 번 적어 보기</span></button>
+
+    <div class="grp">웨이포인트 점검 4문항</div>
+    <div class="wpq">
+      <label for="q1"><small>내가 제대로 된 팀을 꾸렸나?</small>리더별 이번 달 상태는요?<textarea id="q1" data-k="q1" placeholder="예: 라라 → 잘 가는 중 / 효정 → 이번 주 통화 필요"></textarea></label>
+      <label for="q2"><small>내게 필요한 도구가 있나?</small>팀이 전화·명단 정리에 쓸 도구는요?<textarea id="q2" data-k="q2" placeholder="예: 전화 스크립트, 명단 양식, 트레이닝 영상"></textarea></label>
+      <label for="q3"><small>내게 필요한 자원이 있나?</small>시간, 콘텐츠, 행사 참석은요?<textarea id="q3" data-k="q3" placeholder="예: 하루 30분 연락 시간 / 다음 컨벤션 동행"></textarea></label>
+      <label for="q4"><small>나는 그럴 믿음을 갖고 있나?</small>지금 내가 가장 믿는 것 한 가지는요?<textarea id="q4" data-k="q4" placeholder="한 줄이면 충분해요"></textarea></label>
+    </div>
+
+    <div class="grp">이번 달 ~ 10월</div>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="b1"><span class="box">✓</span><span class="tx"><b>팀 설문 5문항</b> 만들어 리더 4명에게 받기<small>마음에 든 것 · 아쉬운 것 · 필요한 도구 · 필요한 자원 · 다음 달 목표</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="b2"><span class="box">✓</span><span class="tx"><b>중간 웨이포인트</b> 2회 잡기<small>예: 15일, 25일. 리더별 점수 현황을 같이 봐요.</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="b3"><span class="box">✓</span><span class="tx">팀 트레이닝에 <b>‘세 가지 용기’</b> 넣기<small>소개하기 · 후속 연락 · 부정적인 말에 답하기</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="b4"><span class="box">✓</span><span class="tx">‘이번 달 3명’ 루틴에 <b>레이스 목표 한 줄</b> 추가하기</span></button>
+
+    <div class="grp">2027년 3월 전까지</div>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="c1"><span class="box">✓</span><span class="tx">변경 발표가 나오면 <b>팀용 요약 1장</b> 만들기<small>공개 전에 브랜드 규정(수입·모집 표현 없음)으로 점검.</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="c2"><span class="box">✓</span><span class="tx">내년 컨벤션에 <b>함께 갈 팀원 목표 인원</b> 정하기<small>“행사에 빠지지 않는 것이 성공 요인.”</small></span></button>
+    <button class="todo" role="checkbox" aria-checked="false" data-k="c3"><span class="box">✓</span><span class="tx">콘텐츠로 <b>‘가족과 함께 여행하는 일상’</b> 보여주기<small>21번째 승선 기록처럼 삶이 증거가 되는 장면으로. 수입 표현 없이.</small></span></button>
+
+    <div class="grp">바로 쓰는 말 4가지</div>
+
+    <div class="script"><h4>① 잠재력 한 문장</h4>
+      <p id="s1">○○님은 [강점] 덕분에 이 일을 정말 잘 해내실 거라고 저는 진심으로 믿어요. 필요한 건 능력이 아니라 옆에서 응원해 줄 사람이라고 생각해서, 제가 옆에서 같이 갈게요.</p>
+      <button class="copy" data-c="s1">복사하기</button></div>
+
+    <div class="script"><h4>② 후속 연락</h4>
+      <p id="s2">지난번에 나눈 이야기가 계속 생각나서 연락드렸어요. 궁금한 점 있으셨다면 편하게 말씀해 주세요. 다음 만남 날짜를 하나만 같이 잡아 볼까요?</p>
+      <button class="copy" data-c="s2">복사하기</button></div>
+
+    <div class="script"><h4>③ 부정적인 말을 들었을 때</h4>
+      <p id="s3">말씀 잘 들었어요. 의견은 존중하고, 저는 다르게 생각해요. 제가 직접 경험한 걸 보여드릴게요.</p>
+      <button class="copy" data-c="s3">복사하기</button></div>
+
+    <div class="script"><h4>④ 리더에게 중간 점검 메시지</h4>
+      <p id="s4">이번 달 중간 점검이에요 🧭 잘 가고 있는지 같이 봐요. 1) 이번 달 목표 2) 필요한 도구 3) 필요한 자원 4) 나에게 필요한 응원. 편할 때 답 주세요!</p>
+      <button class="copy" data-c="s4">복사하기</button></div>
+  </section>
+
+  <!-- 7. 확인 -->
+  <section class="wp" id="check">
+    <div class="wp-head"><span class="ov">Double check</span><h2>공식 자료로 확인할 것</h2></div>
+    <div class="card">
+      <ul class="list chk">
+        <li>1·2·3단계 쿠폰 금액이 <b>단계별 누적인지, 각각 따로인지</b></li>
+        <li>레이스 <b>시작일과 마감일</b> (자막에는 ‘이미 진행 중’만 나와요)</li>
+        <li>점수표의 ‘기존 파트너’, ‘회원 전용’ 표현과 정확한 조건</li>
+        <li>쿠폰으로 고를 수 있는 <b>4가지 여행 상품</b> 목록</li>
+        <li>‘보호 대상 자격’의 정의와 해당 직급</li>
+        <li>‘블랙 카드’가 가리키는 것</li>
+        <li>10년 동안의 승객 수: 자막에 <b>670만 명 / 670,000명</b>이 섞여 나왔어요</li>
+        <li>‘세 번째 달’ 크루즈와 팀 리더십 보너스 언급 부분은 번역이 불분명해요</li>
+        <li>앤서니 발표(보상 플랜 업데이트)의 세부 항목</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <b>Convention notes</b><br>
+  실시간 번역 자막 기준 정리 · 공식 자료가 아니에요<br>
+  내부 학습용이라 검색에 나오지 않도록 설정했어요
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── 저장 헬퍼 (막혀 있어도 페이지는 정상 작동) ── */
+  var P='convnotes:';
+  function sget(k){try{return localStorage.getItem(P+k);}catch(e){return null;}}
+  function sset(k,v){try{localStorage.setItem(P+k,v);}catch(e){}}
+
+  /* ── 계산기 ── */
+  var TYPES=[
+    {n:'프리미엄 파트너 활성화',s:'1건당 20점',p:20},
+    {n:'기존 파트너',s:'1건당 10점',p:10},
+    {n:'스타터 파트너 · 파트너 전용',s:'1건당 5점',p:5},
+    {n:'프리미엄 회원 (회원 전용)',s:'1건당 10점',p:10}
+  ];
+  var STAGES=[{n:1,pts:150,usd:2000},{n:2,pts:240,usd:2500},{n:3,pts:335,usd:3500}];
+  var MAXP=335, counts=TYPES.map(function(){return 0;});
+  var rowsEl=document.getElementById('rows');
+  var fill=document.getElementById('fill'), ship=document.getElementById('ship'), res=document.getElementById('res');
+  var outs=[];
+
+  TYPES.forEach(function(t,i){
+    var r=document.createElement('div'); r.className='row';
+    r.innerHTML='<div class="lb">'+t.n+'<small>'+t.s+'</small></div>'+
+      '<div class="step"><button type="button" aria-label="'+t.n+' 줄이기">−</button><output>0</output><button type="button" aria-label="'+t.n+' 늘리기">+</button></div>';
+    var b=r.querySelectorAll('button'), o=r.querySelector('output');
+    b[0].addEventListener('click',function(){counts[i]=Math.max(0,counts[i]-1);draw();});
+    b[1].addEventListener('click',function(){counts[i]=Math.min(99,counts[i]+1);draw();});
+    outs.push(o); rowsEl.appendChild(r);
+  });
+
+  function fmt(n){return n.toLocaleString('ko-KR');}
+  function draw(){
+    var total=0; counts.forEach(function(c,i){total+=c*TYPES[i].p; outs[i].textContent=c;});
+    var pct=Math.min(total/MAXP,1)*100;
+    fill.style.width=pct+'%';
+    ship.style.left=Math.min(Math.max(pct,3),97)+'%';
+    var reached=null,next=null;
+    STAGES.forEach(function(s){ if(total>=s.pts){reached=s;} else if(!next){next=s;} });
+    var h='<span class="big">'+fmt(total)+'점</span>';
+    if(!reached){
+      h+='아직 1단계 전이에요.';
+    }else{
+      h+='<b>'+reached.n+'단계 도달</b> · 여행 쿠폰 $'+fmt(reached.usd)+' 상당(자막 기준)';
+    }
+    if(next){
+      var gap=next.pts-total;
+      h+='<br>'+next.n+'단계('+next.pts+'점)까지 <b>'+gap+'점</b> 남았어요.<br>'+
+         '프리미엄 파트너 활성화 <b>'+Math.ceil(gap/20)+'건</b>, 또는 기존 파트너 <b>'+Math.ceil(gap/10)+'건</b>이면 닿아요.';
+    }else{
+      h+='<br>3단계까지 모두 도달했어요 🎉';
+    }
+    res.innerHTML=h;
+  }
+  draw();
+
+  /* ── 체크리스트 ── */
+  var todos=[].slice.call(document.querySelectorAll('.todo'));
+  var prog=document.getElementById('prog');
+  function updProg(){
+    var d=todos.filter(function(t){return t.getAttribute('aria-checked')==='true';}).length;
+    prog.textContent=d+' / '+todos.length+' 완료';
+  }
+  todos.forEach(function(t){
+    var k='t:'+t.getAttribute('data-k');
+    if(sget(k)==='1'){t.setAttribute('aria-checked','true');}
+    t.addEventListener('click',function(){
+      var on=t.getAttribute('aria-checked')!=='true';
+      t.setAttribute('aria-checked',on?'true':'false'); sset(k,on?'1':'0'); updProg();
+    });
+  });
+  updProg();
+
+  /* ── 웨이포인트 메모 ── */
+  [].slice.call(document.querySelectorAll('textarea[data-k]')).forEach(function(a){
+    var k='q:'+a.getAttribute('data-k'), v=sget(k);
+    if(v){a.value=v;}
+    a.addEventListener('input',function(){sset(k,a.value);});
+  });
+
+  /* ── 복사 ── */
+  function copyText(txt){
+    if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(txt);}
+    return new Promise(function(ok,no){
+      try{
+        var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select(); var r=document.execCommand('copy'); document.body.removeChild(ta);
+        r?ok():no();
+      }catch(e){no(e);}
+    });
+  }
+  [].slice.call(document.querySelectorAll('.copy')).forEach(function(b){
+    b.addEventListener('click',function(){
+      var txt=document.getElementById(b.getAttribute('data-c')).textContent.trim();
+      copyText(txt).then(function(){b.textContent='복사했어요 ✓';}).catch(function(){b.textContent='길게 눌러 직접 복사해 주세요';});
+      setTimeout(function(){b.textContent='복사하기';},1800);
+    });
+  });
+
+  /* ── 현재 섹션 표시 ── */
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  var secs=chips.map(function(c){return document.querySelector(c.getAttribute('href'));});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          var i=secs.indexOf(e.target);
+          chips.forEach(function(c,j){c.classList.toggle('on',i===j);});
+          if(chips[i]){var n=document.getElementById('nav'); n.scrollTo({left:chips[i].offsetLeft-16,behavior:'smooth'});}
+        }
+      });
+    },{rootMargin:'-30% 0px -60% 0px'});
+    secs.forEach(function(s){if(s){io.observe(s);}});
+  }
+})();
+</script>
+</body>
+</html>
